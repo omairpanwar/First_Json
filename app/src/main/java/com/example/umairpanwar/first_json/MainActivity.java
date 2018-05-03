@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 String subject = array.getString(i);
                 subjects[i] = subject;
             }
+
+
+
             JSONObject jsonObject = rootobject.getJSONObject("department");
             String dptnmae = jsonObject.getString("name");
             String block = jsonObject.getString("block");
@@ -47,10 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
             Department dpt = new Department(dptnmae,block,code);
 
-
+            String vr="";
             Student student = new Student(name,rollno,fname,age,subjects,dpt);
-            textView.setText(String.valueOf(student.getName()+"   "+student.getRollno()+"   "+student.getFname()+"   "+student.getAge()));
+            for (int i=0;i<student.getSubject().length;i++)
+            {
+                vr=vr+student.getSubject()[i]+" ";
+            }
+            textView.setText(String.valueOf(student.getName()+"   "+student.getRollno()+"   "+student.getFname()+"   "+student.getAge()+"   "+vr));
             textView2.setText(String.valueOf(dpt.getBlocks() +"   "+ dpt.getName() +"   "+ dpt.getCode()));
+
 
         } catch (JSONException e) {
             e.printStackTrace();
